@@ -1,0 +1,1122 @@
+/* Global Resets & Basic Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* Default font */
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    overflow-x: hidden; /* Prevent horizontal scroll caused by animations */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* Heading font */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; }
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Variables */
+:root {
+    --primary-color: #005A9C;
+    --secondary-color: #F0F0F0;
+    --accent-color: #4A90E2;
+    --text-color: #333333;
+    --white: #FFFFFF;
+    --light-gray: #f8f9fa; /* Slightly different from secondary for subtle contrast */
+    --header-height: 80px; /* Adjust as needed */
+}
+
+/* Utility Classes */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Unified transition */
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #3a7bc8; /* Slightly darker accent */
+    color: var(--white);
+    transform: translateY(-3px) scale(1.03); /* Enhanced hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-3px); /* Add subtle lift */
+}
+
+section {
+    padding: 80px 0; /* Increased padding */
+    overflow: hidden; /* Contain animations */
+}
+
+section:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation Classes (to be triggered by JS) */
+.animate-on-scroll {
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: none; /* Reset transform when visible */
+}
+
+.animate-fade-in-up.is-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-left.is-visible {
+    animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.animate-fade-in-right.is-visible {
+    animation: fadeInRight 0.8s ease-out forwards;
+}
+
+/* Add specific section styles below */
+
+/* 1. Header */
+#main-header {
+    background-color: var(--white);
+    padding: 15px 0;
+    position: fixed; /* Changed to fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+/* Add a class for scrolled header state if needed */
+/* #main-header.scrolled { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); } */
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Ensure container takes full width */
+}
+
+#main-header .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#main-header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+#main-header nav ul li {
+    margin-left: 25px;
+}
+
+#main-header nav ul li a {
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#main-header nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+#main-header nav ul li a:hover,
+#main-header nav ul li a.active { /* Add .active class via JS */
+    color: var(--accent-color);
+}
+
+#main-header nav ul li a:hover::after,
+#main-header nav ul li a.active::after {
+    width: 100%;
+}
+
+.header-cta {
+    padding: 10px 20px; /* Slightly smaller padding for header button */
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* Above nav */
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: background-color 0s 0.3s; /* Delay hiding the middle bar */
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+/* Mobile Nav Active State (Toggled via JS) */
+.mobile-nav-active #main-header nav {
+    display: block;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+}
+
+.mobile-nav-active #main-header nav ul {
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile-nav-active #main-header nav ul li {
+    margin: 15px 0;
+    margin-left: 0; /* Reset margin */
+}
+
+.mobile-nav-active .mobile-nav-toggle .hamburger {
+    background-color: transparent; /* Hide middle bar */
+}
+
+.mobile-nav-active .mobile-nav-toggle .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.mobile-nav-active .mobile-nav-toggle .hamburger::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+/* Adjustments for when header is fixed */
+body {
+    padding-top: var(--header-height); /* Prevent content from hiding behind fixed header */
+}
+
+/* 2. Hero Section */
+#hero {
+    position: relative;
+    color: var(--white);
+    text-align: center;
+    padding: 120px 0; /* Increased padding */
+    min-height: 85vh; /* Ensure it takes significant viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow from background elements */
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 90, 156, 0.8), rgba(0, 90, 156, 0.9)), url('img/hero-background.jpg') no-repeat center center/cover; /* Placeholder image - replace 'images/hero-background.jpg' */
+    z-index: 1;
+    background-attachment: fixed;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Example for abstract tech background (alternative to image) */
+/*
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    opacity: 0.9;
+    z-index: 1;
+    // Add ::before/::after for animated elements if desired
+}
+*/
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px; /* Limit content width for readability */
+    animation: fadeInUp 1s ease-out; /* Animate hero content on load */
+}
+
+#hero h1 {
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    font-size: 3.2rem; /* Larger hero headline */
+}
+
+#hero .subheading {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400; /* Lighter weight for subheading */
+}
+
+.hero-cta {
+    padding: 15px 35px; /* Larger CTA button */
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.trust-icons {
+    margin-top: 2rem;
+    opacity: 0.8;
+}
+
+.trust-icons span {
+    margin: 0 15px;
+    font-size: 0.9rem;
+}
+
+.trust-icons i { /* Assuming Font Awesome */
+    margin-right: 5px;
+    color: var(--accent-color);
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    #hero {
+        padding: 80px 0;
+        min-height: 70vh;
+    }
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+    #hero .subheading {
+        font-size: 1.1rem;
+    }
+    .hero-cta {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    .trust-icons span {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+/* Responsive Header */
+@media (max-width: 992px) {
+    #main-header nav {
+        display: none; /* Hide desktop nav */
+    }
+    .header-cta {
+        display: none; /* Hide header CTA on smaller screens, rely on hero */
+    }
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger */
+    }
+}
+
+/* 3. Value Proposition Section */
+#value-prop {
+    background-color: var(--white); /* White background for this section */
+    text-align: center;
+}
+
+.section-title { /* Reusable class for section titles */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.section-intro { /* Reusable class for intro paragraphs */
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.value-prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-top: 3rem;
+    text-align: left; /* Align text left within grid items */
+}
+
+.value-item {
+    background-color: var(--light-gray); /* Subtle background for items */
+    padding: 30px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-item.is-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation for grid items */
+.value-item.is-visible:nth-child(1) { animation-delay: 0.1s; }
+.value-item.is-visible:nth-child(2) { animation-delay: 0.2s; }
+.value-item.is-visible:nth-child(3) { animation-delay: 0.3s; }
+
+
+.value-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.value-icon {
+    font-size: 2.5rem; /* Adjust size as needed */
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    display: inline-block; /* Or flex if needed for alignment */
+    transition: transform 0.3s ease;
+    /* If using images/SVG: */
+    /* width: 50px; */
+    /* height: 50px; */
+}
+
+.value-item:hover .value-icon {
+    transform: scale(1.1); /* Scale icon on hover */
+}
+
+.value-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+.value-item p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 0; /* Remove default paragraph margin */
+}
+
+/* Responsive Value Prop */
+@media (max-width: 768px) {
+    .value-prop-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .value-item {
+        text-align: center; /* Center text on smaller screens */
+    }
+}
+
+/* 4. Services Section */
+#services {
+    background-color: var(--light-gray); /* Use light gray background */
+    text-align: center;
+}
+
+.services-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */ /* Option 1: Auto-fit */
+    grid-template-columns: repeat(4, 1fr); /* Option 2: Fixed 4 columns */
+    gap: 30px;
+    margin-top: 3rem;
+    text-align: left;
+}
+
+.service-item {
+    background-color: var(--white); /* White background for items */
+    padding: 35px 25px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0; /* Subtle border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Combined transitions */
+    display: flex; /* Use flexbox for better icon/text alignment */
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+}
+
+.service-item.is-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation for grid items */
+.service-item.is-visible:nth-child(1) { animation-delay: 0.1s; }
+.service-item.is-visible:nth-child(2) { animation-delay: 0.2s; }
+.service-item.is-visible:nth-child(3) { animation-delay: 0.3s; }
+.service-item.is-visible:nth-child(4) { animation-delay: 0.4s; }
+
+
+.service-item:hover {
+    transform: translateY(-8px) scale(1.05); /* Combined transform */
+    box-shadow: 0 12px 25px rgba(0, 90, 156, 0.15); /* Primary color shadow on hover */
+    border-color: var(--accent-color); /* Change border color on hover */
+}
+
+.service-icon {
+    font-size: 2.8rem; /* Larger icons */
+    color: var(--primary-color); /* Use primary color for icons */
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    /* If using images/SVG: */
+    /* width: 60px; */
+    /* height: 60px; */
+}
+
+.service-item:hover .service-icon {
+    transform: scale(1.15) rotate(15deg); /* Rotate and scale icon */
+}
+
+
+.service-item h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem; /* Slightly smaller than value prop */
+    color: var(--primary-color);
+}
+
+.service-item p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    flex-grow: 1; /* Allow paragraph to take available space */
+    margin-bottom: 0;
+}
+
+/* Responsive Services */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .services-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+    .service-item {
+        padding: 25px 20px;
+    }
+}
+
+/* 5. Case Studies Section */
+#case-studies {
+    background-color: var(--white); /* White background */
+    text-align: center;
+}
+
+.case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-top: 3rem;
+    text-align: left;
+}
+
+.case-study-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden; /* Ensure content stays within rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack logo and content */
+}
+
+.case-study-card.is-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation for grid items */
+.case-study-card.is-visible:nth-child(1) { animation-delay: 0.1s; }
+.case-study-card.is-visible:nth-child(2) { animation-delay: 0.2s; }
+.case-study-card.is-visible:nth-child(3) { animation-delay: 0.3s; }
+
+
+.case-study-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.case-study-logo {
+    background-color: var(--light-gray); /* Background for logo area */
+    padding: 20px;
+    text-align: center; /* Center logo */
+    border-bottom: 1px solid #e0e0e0;
+    min-height: 80px; /* Ensure consistent height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.case-study-logo img {
+    max-height: 50px; /* Control logo size */
+    width: auto; /* Maintain aspect ratio */
+    filter: grayscale(50%); /* Optional: slightly desaturate logos */
+    opacity: 0.8;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.case-study-card:hover .case-study-logo img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.case-study-content {
+    padding: 25px;
+    flex-grow: 1; /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
+}
+
+.case-study-content h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.case-study-content p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Push result and link down */
+}
+
+.case-study-result {
+    background-color: var(--accent-color-light, #e8f0fe); /* Light accent background */
+    color: var(--accent-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: inline-block; /* Fit content width */
+    font-size: 0.9rem;
+}
+
+.case-study-result strong {
+    font-size: 1.1rem;
+    margin-right: 5px;
+}
+
+.case-study-link {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+    align-self: flex-start; /* Align link to the start */
+    display: inline-block; /* Needed for transform */
+}
+
+.case-study-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transform: translateX(3px); /* Subtle move right */
+}
+
+/* Responsive Case Studies */
+@media (max-width: 768px) {
+    .case-studies-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+}
+
+/* 6. Testimonials Section */
+#testimonials {
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    padding: 30px 0;
+}
+
+.testimonial-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card.is-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation for grid items */
+.testimonial-card.is-visible:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card.is-visible:nth-child(2) { animation-delay: 0.2s; }
+.testimonial-card.is-visible:nth-child(3) { animation-delay: 0.3s; }
+
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    object-fit: cover; /* Ensure image covers the circle */
+    border: 3px solid var(--accent-color); /* Add border */
+}
+
+.testimonial-quote {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Allow quote to take available space */
+    position: relative;
+    padding-left: 20px; /* Space for quote mark */
+}
+
+.testimonial-quote::before {
+    content: '“'; /* Opening quote */
+    position: absolute;
+    left: -5px;
+    top: -10px;
+    font-size: 3rem;
+    color: var(--accent-color);
+    opacity: 0.3;
+}
+
+
+.testimonial-author {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.author-name {
+    font-weight: bold;
+}
+
+/* Responsive Testimonials */
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+}
+
+/* 7. Main CTA Section */
+#main-cta {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); /* Gradient background */
+    color: var(--white);
+    text-align: center;
+    padding: 80px 0;
+}
+
+#main-cta .section-title {
+    color: var(--white); /* White title for contrast */
+}
+
+#main-cta .subheading {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+#main-cta .btn {
+    padding: 18px 40px; /* Larger button */
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--white); /* White button */
+    color: var(--primary-color); /* Primary text color */
+}
+
+#main-cta .btn:hover {
+    background-color: var(--light-gray); /* Light gray on hover */
+    color: var(--primary-color);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.cta-supporting-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 8. Blog Preview Section */
+#blog-preview {
+    background-color: var(--white);
+    text-align: center;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 3rem;
+}
+
+.blog-post-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post-card.is-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation for grid items */
+.blog-post-card.is-visible:nth-child(1) { animation-delay: 0.1s; }
+.blog-post-card.is-visible:nth-child(2) { animation-delay: 0.2s; }
+.blog-post-card.is-visible:nth-child(3) { animation-delay: 0.3s; }
+
+
+.blog-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.blog-post-image {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+.blog-post-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    padding: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.blog-post-card p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    padding: 0 20px;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Push link to the bottom */
+}
+
+.blog-post-link {
+    color: var(--accent-color);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px;
+    display: block;
+    text-align: left;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.blog-post-link:hover {
+    color: var(--primary-color);
+    transform: translateX(3px); /* Subtle move right */
+}
+
+/* Responsive Blog Preview */
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+}
+
+/* 9. Contact/Booking Section */
+#contact {
+    background-color: var(--white);
+    padding: 60px 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px; /* Increased gap */
+}
+
+.contact-form {
+    /* Form styles will be added below */
+}
+
+.contact-details {
+    /* Details styles will be added below */
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); /* Focus ring */
+}
+
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.form-reassurance {
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 1rem;
+}
+
+.contact-details h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.contact-details p {
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Needed for transform */
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1); /* Scale icon on hover */
+}
+
+/* Responsive Contact Section */
+@media (min-width: 768px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 10. Footer */
+#main-footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 40px 0;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
+}
+
+.footer-logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.footer-tagline {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-copyright {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.7);
+    width: 100%; /* Ensure copyright takes full width on wrap */
+    margin-top: 1rem; /* Add space when wrapped */
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-copyright {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
